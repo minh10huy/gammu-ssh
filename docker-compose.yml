@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  gammuapi:
+    #image: img_gammuapi:v1
+    image: img_gammuapi:v2
+    ###ports:
+    ###  - 3306:3306
+    depends_on:
+      - dbmysql
+    privileged: true
+    stdin_open: true
+    tty: true
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB1"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./init_gammu.sh:/init_gammu.sh
+      - ./sshkey:/root/.ssh
+    #command: chmod +x /init_gammu.sh
+    #command: /init_gammu.sh
+    #command: bash
+    #restart: always
+    ports:
+      - "22122:22"
+
+  dbmysql:
+    image: hypriot/rpi-mysql:5.5
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init_mysql:/mnt
+    #command: chmod +x /mnt/run.sh
+    #command: /mnt/run.sh
+    #restart: always
+    #env_file: .env
+    environment:
+      - MYSQL_DATABASE=smsdb
+      - MYSQL_USER=smsd
+      - MYSQL_PASSWORD=passw0rd
+      - MYSQL_ROOT_PASSWORD=passw0rd

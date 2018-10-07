@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  ubuntu:
+    image: ubuntu:trustycus
+    stdin_open: true
+    tty: true
+    

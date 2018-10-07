@@ -1,0 +1,7 @@
+FROM ubuntu:trusty
+MAINTAINER Huy To Dac <todchuy2406@gmail.com>
+
+USER root
+WORKDIR /
+
+RUN apt-get update
