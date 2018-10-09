@@ -8,6 +8,7 @@ service gammu-smsd start
 chmod 600 /root/.ssh/authorized_keys
 chmod 700 /root/.ssh
 chown root:root /root/.ssh
+chown root:root /root/.ssh/authorized_keys
 sed -i 's/PermitRootLogin\ yes/PermitRootLogin\ without-password/g' /etc/ssh/sshd_config
 sed -i 's/\#AuthorizedKeysFile/AuthorizedKeysFile/g' /etc/ssh/sshd_config
 sed -i 's/\#PasswordAuthentication\ yes/PasswordAuthentication\ no/g' /etc/ssh/sshd_config
